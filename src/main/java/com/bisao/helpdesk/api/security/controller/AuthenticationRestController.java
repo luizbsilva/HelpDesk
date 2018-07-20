@@ -22,6 +22,7 @@ import com.bisao.helpdesk.api.security.jwt.JwtTokenUtil;
 import com.bisao.helpdesk.api.security.model.CurrentUser;
 import com.bisao.helpdesk.api.service.UserService;
 
+
 @RestController
 @CrossOrigin(origins = "*")
 public class AuthenticationRestController {
@@ -50,26 +51,21 @@ public class AuthenticationRestController {
 		final String token = jwtTokenUtil.genereteToken(userDetails);
 		final User user = userService.findByEmail(authenticationRequest.getEmail());
 		user.setPassword(null);
-
 		return ResponseEntity.ok(new CurrentUser(token, user));
 	}
 
 	@PostMapping(value = "/api/refresh")
-	public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request)
-			throws AuthenticationException {
-
-		final String token = request.getHeader("Authorization");
+	public ResponseEntity<?> refreshAndGetAuthenticationToken(HttpServletRequest request) {
+		String token = request.getHeader("Authorization");
 		String username = jwtTokenUtil.getUserNameFromToken(token);
 		final User user = userService.findByEmail(username);
 
 		if (jwtTokenUtil.canTokenBeRefreshed(token)) {
-			String refreshToken = jwtTokenUtil.refreshToken(token);
-			return ResponseEntity.ok(new CurrentUser(refreshToken, user));
+			String refreshedToken = jwtTokenUtil.refreshToken(token);
+			return ResponseEntity.ok(new CurrentUser(refreshedToken, user));
 		} else {
 			return ResponseEntity.badRequest().body(null);
-
 		}
-
 	}
 
 }
