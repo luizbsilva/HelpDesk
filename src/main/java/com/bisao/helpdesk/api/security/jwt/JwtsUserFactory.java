@@ -13,8 +13,8 @@ public class JwtsUserFactory {
 	private JwtsUserFactory() {
 	}
 	
-	public static JwtsUser create(User user) {
-		return new JwtsUser(user.getId(), user.getEmail(), user.getPassword(), mapToGrantedAuthorities(user.getProfile()));
+	public static JwtUser create(User user) {
+		return new JwtUser(user.getId(), user.getEmail(), user.getPassword(), mapToGrantedAuthorities(user.getProfile()));
 		
 	}
 	private static List<GrantedAuthority> mapToGrantedAuthorities(ProfileEnum profileEnum) {

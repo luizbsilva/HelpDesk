@@ -1,7 +1,6 @@
 package com.bisao.helpdesk.api.security.jwt;
 
 import java.io.Serializable;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -9,8 +8,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
-
-import com.bisao.helpdesk.util.DateUtil;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
@@ -20,7 +17,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
 public class JwtTokenUtil implements Serializable {
 
 	private static final long serialVersionUID = 1804640419921856024L;
-	
+
 	static final String CLAIM_KEY_USERNAME = "sub";
 	static final String CLAIM_KEY_CREATED = "created";
 	static final String CLAIM_KEY_EXPIRED = "exp";
@@ -44,11 +41,11 @@ public class JwtTokenUtil implements Serializable {
 
 	}
 
-	public LocalDate getExpirationFromToken(String token) {
-		LocalDate expiration;
+	public Date getExpirationFromToken(String token) {
+		Date expiration;
 		try {
 
-			expiration = DateUtil.converteDateParaLocalDate(this.getClaimsFromToken(token).getExpiration());
+			expiration = this.getClaimsFromToken(token).getExpiration();
 		} catch (Exception e) {
 			expiration = null;
 		}
@@ -68,7 +65,7 @@ public class JwtTokenUtil implements Serializable {
 	}
 
 	private boolean isTokenExpired(String token) {
-		return getExpirationFromToken(token).isBefore(DateUtil.converteDateParaLocalDate(new Date()));
+		return getExpirationFromToken(token).before(new Date());
 
 	}
 
@@ -76,7 +73,7 @@ public class JwtTokenUtil implements Serializable {
 		Map<String, Object> claims = new HashMap<>();
 
 		claims.put(CLAIM_KEY_USERNAME, userDetails.getUsername());
-		claims.put(CLAIM_KEY_CREATED, DateUtil.converteDateParaLocalDate(new Date()));
+		claims.put(CLAIM_KEY_CREATED, new Date());
 
 		return doGenerateToken(claims);
 	}
@@ -107,7 +104,7 @@ public class JwtTokenUtil implements Serializable {
 	}
 
 	public Boolean validateToken(String token, UserDetails userDetails) {
-		JwtsUser user = (JwtsUser) userDetails;
+		JwtUser user = (JwtUser) userDetails;
 		final String userName = getUserNameFromToken(token);
 		return userName.equals(user.getUsername()) && !isTokenExpired(token);
 

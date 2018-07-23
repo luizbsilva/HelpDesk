@@ -1,6 +1,6 @@
 package com.bisao.helpdesk.api.entity;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import org.springframework.data.annotation.Id;
@@ -20,23 +20,23 @@ public class Ticket {
 	@DBRef(lazy = true)
 	private User user;
 
-	private LocalDate date;
-
-	private Integer number;
+	private Date date;
 
 	private String title;
 
-	private String description;
-
-	private String image;
-
-	@DBRef(lazy = true)
-	private User assignerUser;
+	private Integer number;
 
 	private StatusEnum status;
 
 	private PriorityEnum priority;
 
+	@DBRef(lazy = true)
+	private User assignedUser;
+
+	private String description;
+
+	private String image;
+	
 	@Transient
 	private List<ChangeStatus> changes;
 
@@ -56,20 +56,12 @@ public class Ticket {
 		this.user = user;
 	}
 
-	public LocalDate getDate() {
+	public Date getDate() {
 		return date;
 	}
 
-	public void setDate(LocalDate date) {
+	public void setDate(Date date) {
 		this.date = date;
-	}
-
-	public Integer getNumber() {
-		return number;
-	}
-
-	public void setNumber(Integer number) {
-		this.number = number;
 	}
 
 	public String getTitle() {
@@ -80,28 +72,12 @@ public class Ticket {
 		this.title = title;
 	}
 
-	public String getDescription() {
-		return description;
+	public Integer getNumber() {
+		return number;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getImage() {
-		return image;
-	}
-
-	public void setImage(String image) {
-		this.image = image;
-	}
-
-	public User getAssignerUser() {
-		return assignerUser;
-	}
-
-	public void setAssignerUser(User assignerUser) {
-		this.assignerUser = assignerUser;
+	public void setNumber(Integer number) {
+		this.number = number;
 	}
 
 	public StatusEnum getStatus() {
@@ -118,6 +94,30 @@ public class Ticket {
 
 	public void setPriority(PriorityEnum priority) {
 		this.priority = priority;
+	}
+
+	public User getAssignedUser() {
+		return assignedUser;
+	}
+
+	public void setAssignedUser(User assignedUser) {
+		this.assignedUser = assignedUser;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public String getImage() {
+		return image;
+	}
+
+	public void setImage(String image) {
+		this.image = image;
 	}
 
 	public List<ChangeStatus> getChanges() {

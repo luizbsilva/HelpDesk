@@ -1,16 +1,17 @@
 package com.bisao.helpdesk.api.service;
 
-import java.util.Optional;
-
 import org.springframework.data.domain.Page;
+import org.springframework.stereotype.Component;
 
 import com.bisao.helpdesk.api.entity.ChangeStatus;
 import com.bisao.helpdesk.api.entity.Ticket;
 
+@Component
 public interface TicketService {
+
 	Ticket createOrUpdate(Ticket ticket);
 
-	Optional<Ticket> findById(String id);
+	Ticket findById(String id);
 
 	void delete(String id);
 
@@ -31,7 +32,7 @@ public interface TicketService {
 
 	Iterable<Ticket> findAll();
 
-	public Page<Ticket> findByParametersAndAssignedUser(int page, int count, String title, String status,
-			String priority, String assignedUserId);
+	Page<Ticket> findByParametersAndAssignedUser(int page, int count, String title, String status, String priority,
+			String assignedUserId);
 
 }

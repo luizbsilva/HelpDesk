@@ -22,7 +22,6 @@ import com.bisao.helpdesk.api.security.jwt.JwtTokenUtil;
 import com.bisao.helpdesk.api.security.model.CurrentUser;
 import com.bisao.helpdesk.api.service.UserService;
 
-
 @RestController
 @CrossOrigin(origins = "*")
 public class AuthenticationRestController {
