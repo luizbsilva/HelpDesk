@@ -128,11 +128,14 @@ public class UserController {
 	public ResponseEntity<Response<String>> delete(@PathVariable("id") String id) {
 		Response<String> response = new Response<String>();
 		User user = userService.findById(id);
+		
 		if (user == null) {
 			response.getErrors().add("Register not found id:" + id);
 			return ResponseEntity.badRequest().body(response);
 		}
+		
 		userService.delete(id);
+		
 		return ResponseEntity.ok(new Response<String>());
 	}
 
@@ -142,6 +145,7 @@ public class UserController {
 		Response<Page<User>> response = new Response<Page<User>>();
 		Page<User> users = userService.findAll(page, count);
 		response.setData(users);
+		
 		return ResponseEntity.ok(response);
 	}
 
