@@ -1,6 +1,6 @@
 package com.bisao.helpdesk.api.entity;
 
-import java.time.LocalDate;
+import java.util.Date;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.DBRef;
@@ -19,8 +19,8 @@ public class ChangeStatus {
 
 	private User userChange;
 
-	private LocalDate dateChangeStatus;
-	
+	private Date dateChangeStatus;
+
 	private StatusEnum status;
 
 	public String getId() {
@@ -47,11 +47,11 @@ public class ChangeStatus {
 		this.userChange = userChange;
 	}
 
-	public LocalDate getDateChangeStatus() {
+	public Date getDateChangeStatus() {
 		return dateChangeStatus;
 	}
 
-	public void setDateChangeStatus(LocalDate dateChangeStatus) {
+	public void setDateChangeStatus(Date dateChangeStatus) {
 		this.dateChangeStatus = dateChangeStatus;
 	}
 

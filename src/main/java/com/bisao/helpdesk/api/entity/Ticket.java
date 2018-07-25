@@ -36,7 +36,7 @@ public class Ticket {
 	private String description;
 
 	private String image;
-	
+
 	@Transient
 	private List<ChangeStatus> changes;
 
