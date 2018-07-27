@@ -17,6 +17,7 @@ public class ChangeStatus {
 	@DBRef
 	private Ticket ticket;
 
+	@DBRef
 	private User userChange;
 
 	private Date dateChangeStatus;

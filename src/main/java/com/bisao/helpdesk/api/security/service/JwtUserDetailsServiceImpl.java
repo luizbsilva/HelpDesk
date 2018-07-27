@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import com.bisao.helpdesk.api.entity.User;
-import com.bisao.helpdesk.api.security.jwt.JwtsUserFactory;
+import com.bisao.helpdesk.api.security.jwt.JwtUserFactory;
 import com.bisao.helpdesk.api.service.UserService;
 
 @Service
@@ -23,6 +23,6 @@ public class JwtUserDetailsServiceImpl implements UserDetailsService {
 			throw new UsernameNotFoundException(String.format("No User found with username '%s'. ", email));
 		}
 		
-		return JwtsUserFactory.create(user);
+		return JwtUserFactory.create(user);
 	}
 }

@@ -9,8 +9,8 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import com.bisao.helpdesk.api.entity.User;
 import com.bisao.helpdesk.api.enums.ProfileEnum;
 
-public class JwtsUserFactory {
-	private JwtsUserFactory() {
+public class JwtUserFactory {
+	private JwtUserFactory() {
 	}
 	
 	public static JwtUser create(User user) {
