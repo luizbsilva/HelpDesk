@@ -1,0 +1,26 @@
+databaseChangeLog:
+
+  - changeSet:
+      id: helpdesk-app-20180727-jose.luiz-01
+      author: jose.luiz
+      changes:
+      - sqlFile:
+          encoding: utf8
+          path: sqls/helpdesk-app-20180727-jose.luiz-01.sql
+          relativeToChangelogFile: true
+  - changeSet:
+      id: helpdesk-app-20180727-jose.luiz-02
+      author: jose.luiz
+      changes:
+      - sqlFile:
+          encoding: utf8
+          path: sqls/helpdesk-app-20180727-jose.luiz-02.sql
+          relativeToChangelogFile: true
+  - changeSet:
+      id: helpdesk-app-20180727-jose.luiz-03
+      author: jose.luiz
+      changes:
+      - sqlFile:
+          encoding: utf8
+          path: sqls/helpdesk-app-20180727-jose.luiz-03.sql
+          relativeToChangelogFile: true        

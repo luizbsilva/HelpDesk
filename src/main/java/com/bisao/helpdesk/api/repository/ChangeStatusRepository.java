@@ -1,10 +1,10 @@
 package com.bisao.helpdesk.api.repository;
 
-import org.springframework.data.mongodb.repository.MongoRepository;
+import org.springframework.data.repository.CrudRepository;
 
 import com.bisao.helpdesk.api.entity.ChangeStatus;
 
-public interface ChangeStatusRepository extends MongoRepository<ChangeStatus, String>{
-	
-	Iterable<ChangeStatus> findByTicketIdOrderByDateChangeStatusDesc(String ticketId);
+public interface ChangeStatusRepository extends CrudRepository<ChangeStatus, Long> {
+
+	Iterable<ChangeStatus> findByTicketIdOrderByDateChangeStatusDesc(Long ticketId);
 }

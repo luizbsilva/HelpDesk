@@ -1,50 +1,72 @@
 package com.bisao.helpdesk.api.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+import javax.persistence.Transient;
 
 import com.bisao.helpdesk.api.enums.PriorityEnum;
 import com.bisao.helpdesk.api.enums.StatusEnum;
 
-@Document
-public class Ticket {
+@Entity
+@Table(name = "ticket")
+public class Ticket implements Serializable{
+
+	private static final long serialVersionUID = -6651447324481737880L;
 
 	@Id
-	private String id;
+	@Column(name = "id_ticket", nullable = false)
+	private Long id;
 
-	@DBRef(lazy = true)
+	@ManyToOne
+	@JoinColumn(name = "id_user", nullable = false)
 	private User user;
 
+
+	@Column(name = "date_ticket", nullable = false)
 	private Date date;
 
+
+	@Column(name = "title", nullable = false)
 	private String title;
 
+
+	@Column(name = "number", nullable = false)
 	private Integer number;
 
+
+	@Column(name = "status", nullable = false)
 	private StatusEnum status;
 
+
+	@Column(name = "priority", nullable = false)
 	private PriorityEnum priority;
 
-	@DBRef(lazy = true)
+	@ManyToOne
+	@JoinColumn(name = "id_assignedUser", nullable = false)
 	private User assignedUser;
 
+	@Column(name = "description", nullable = false)
 	private String description;
 
+	@Column(name = "image", nullable = true)
 	private String image;
 
 	@Transient
 	private List<ChangeStatus> changes;
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

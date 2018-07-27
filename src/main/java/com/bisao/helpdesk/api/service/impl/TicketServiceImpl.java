@@ -27,20 +27,20 @@ public class TicketServiceImpl implements TicketService {
 	}
 
 	@Override
-	public Ticket findById(String id) {
+	public Ticket findById(Long id) {
 		return this.ticketRepository.findOne(id);
 	}
 
 	@Override
-	public void delete(String id) {
+	public void delete(Long id) {
 		this.ticketRepository.delete(id);
 
 	}
 
 	@Override
 	public Page<Ticket> listTicket(int page, int count) {
-		Pageable pages = new PageRequest(page, count);
-		return this.ticketRepository.findAll(pages);
+		//Pageable pages = new PageRequest(page, count);
+		return null;// this.ticketRepository.findAll(pages);
 	}
 
 	@Override
@@ -49,12 +49,12 @@ public class TicketServiceImpl implements TicketService {
 	}
 
 	@Override
-	public Iterable<ChangeStatus> listChangeStatus(String ticketId) {
+	public Iterable<ChangeStatus> listChangeStatus(Long ticketId) {
 		return this.changeStatusRepository.findByTicketIdOrderByDateChangeStatusDesc(ticketId);
 	}
 
 	@Override
-	public Page<Ticket> findByCurrentUser(int page, int count, String userId) {
+	public Page<Ticket> findByCurrentUser(int page, int count, Long userId) {
 		Pageable pages = new PageRequest(page, count);
 		return this.ticketRepository.findByUserIdOrderByDateDesc(pages, userId);
 	}
@@ -69,7 +69,7 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public Page<Ticket> findByParametersAndCurrentUser(int page, int count, String title, String status,
-			String priority, String userId) {
+			String priority, Long userId) {
 		Pageable pages = new PageRequest(page, count);
 		return this.ticketRepository
 				.findByTitleIgnoreCaseContainingAndStatusContainingAndPriorityContainingAndUserIdOrderByDateDesc(title,
@@ -89,7 +89,7 @@ public class TicketServiceImpl implements TicketService {
 
 	@Override
 	public Page<Ticket> findByParametersAndAssignedUser(int page, int count, String title, String status,
-			String priority, String assignedUserId) {
+			String priority, Long assignedUserId) {
 		Pageable pages = new PageRequest(page, count);
 		return this.ticketRepository
 				.findByTitleIgnoreCaseContainingAndStatusContainingAndPriorityContainingAndAssignedUserIdOrderByDateDesc(

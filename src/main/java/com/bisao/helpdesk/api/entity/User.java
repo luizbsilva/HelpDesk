@@ -1,37 +1,46 @@
 package com.bisao.helpdesk.api.entity;
 
+import java.io.Serializable;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
 import org.hibernate.validator.constraints.Email;
 import org.hibernate.validator.constraints.NotBlank;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.index.Indexed;
-import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.bisao.helpdesk.api.enums.ProfileEnum;
 
-@Document
-public class User {
+@Entity
+@Table(name = "usuario")
+public class User implements Serializable {
+
+	private static final long serialVersionUID = -123209264354159029L;
 
 	@Id
-	private String id;
-	
-	@Indexed(unique = true)
+	@Column(name = "id_user", nullable = false)
+	private Long id;
+
 	@NotBlank(message = "Email required")
 	@Email(message = "Email invalid")
+	@Column(name = "email", nullable = false)
 	private String email;
 
 	@NotBlank(message = "PassWord required")
 	@Size(min = 6)
+	@Column(name = "password", nullable = false)
 	private String password;
-	
+
+	@Column(name = "profile", nullable = false)
 	private ProfileEnum profile;
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

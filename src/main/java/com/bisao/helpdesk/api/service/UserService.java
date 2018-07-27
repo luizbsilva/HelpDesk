@@ -10,9 +10,9 @@ public interface UserService {
 
 	User createOrUpdate(User user);
 
-	User findById(String id);
+	User findById(long id);
 
-	void delete(String id);
+	void delete(long id);
 
 	Page<User> findAll(int page, int count);
 }

@@ -147,7 +147,7 @@ public class TicketController {
 
 	@GetMapping(value = "{id}")
 	@PreAuthorize("hasAnyRole('CUSTOMER','TECHNICIAN')")
-	public ResponseEntity<Response<Ticket>> findById(@PathVariable("id") String id) {
+	public ResponseEntity<Response<Ticket>> findById(@PathVariable("id") Long id) {
 		Response<Ticket> response = new Response<>();
 		Ticket ticket = ticketService.findById(id);
 
@@ -178,7 +178,7 @@ public class TicketController {
 
 	@DeleteMapping(value = "/{id}")
 	@PreAuthorize("hasAnyRole('CUSTOMER')")
-	public ResponseEntity<Response<String>> delete(@PathVariable("id") String id) {
+	public ResponseEntity<Response<String>> delete(@PathVariable("id") Long id) {
 		Response<String> response = new Response<>();
 		Ticket ticket = ticketService.findById(id);
 
@@ -255,7 +255,7 @@ public class TicketController {
 
 	@PutMapping(value = "/{id}/{status}")
 	@PreAuthorize("hasAnyRole('CUSTOMER','TECHNICIAN')")
-	public ResponseEntity<Response<Ticket>> changeStatus(@PathVariable("id") String id,
+	public ResponseEntity<Response<Ticket>> changeStatus(@PathVariable("id") Long id,
 			@PathVariable("status") String status, HttpServletRequest request, @RequestBody Ticket ticket,
 			BindingResult result) {
 
@@ -294,8 +294,8 @@ public class TicketController {
 		return ResponseEntity.ok(response);
 	}
 
-	private void validateChangeStatus(String id, String status, BindingResult result) {
-		if (id == null || id.equals("")) {
+	private void validateChangeStatus(Long id, String status, BindingResult result) {
+		if (id == null || id.equals(null)) {
 			result.addError(new ObjectError("Ticket", "Id no information"));
 			return;
 		}

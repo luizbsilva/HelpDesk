@@ -1,34 +1,46 @@
 package com.bisao.helpdesk.api.entity;
 
+import java.io.Serializable;
 import java.util.Date;
 
-import org.springframework.data.annotation.Id;
-import org.springframework.data.mongodb.core.mapping.DBRef;
-import org.springframework.data.mongodb.core.mapping.Document;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
 
 import com.bisao.helpdesk.api.enums.StatusEnum;
 
-@Document
-public class ChangeStatus {
+@Entity
+@Table(name = "changeStatus")
+public class ChangeStatus implements Serializable {
+
+	private static final long serialVersionUID = 3464307492229791329L;
 
 	@Id
-	private String id;
+	@Column(name = "id_changeStatus", nullable = false)
+	private Long id;
 
-	@DBRef
+	@ManyToOne
+	@JoinColumn(name = "id_ticket", nullable = false)
 	private Ticket ticket;
 
-	@DBRef
+	@ManyToOne
+	@JoinColumn(name = "id_userChange", nullable = false)
 	private User userChange;
 
+	@Column(name = "dateChangeStatus", nullable = false)
 	private Date dateChangeStatus;
 
+	@Column(name = "status", nullable = false)
 	private StatusEnum status;
 
-	public String getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 

@@ -110,7 +110,7 @@ public class UserController {
 
 	@GetMapping(value = "{id}")
 	@PreAuthorize("hasAnyRole('ADMIN')")
-	public ResponseEntity<Response<User>> findById(@PathVariable("id") String id) {
+	public ResponseEntity<Response<User>> findById(@PathVariable("id") long id) {
 		Response<User> response = new Response<User>();
 		User user = userService.findById(id);
 		
@@ -125,7 +125,7 @@ public class UserController {
 
 	@DeleteMapping(value = "/{id}")
 	@PreAuthorize("hasAnyRole('ADMIN')")
-	public ResponseEntity<Response<String>> delete(@PathVariable("id") String id) {
+	public ResponseEntity<Response<String>> delete(@PathVariable("id") long id) {
 		Response<String> response = new Response<String>();
 		User user = userService.findById(id);
 		
