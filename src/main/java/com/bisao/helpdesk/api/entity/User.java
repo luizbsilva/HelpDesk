@@ -4,6 +4,8 @@ import java.io.Serializable;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
@@ -20,12 +22,13 @@ public class User implements Serializable {
 	private static final long serialVersionUID = -123209264354159029L;
 
 	@Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "id_user", nullable = false)
 	private Long id;
 
 	@NotBlank(message = "Email required")
 	@Email(message = "Email invalid")
-	@Column(name = "email", nullable = false)
+	@Column(name = "email", nullable = true)
 	private String email;
 
 	@NotBlank(message = "PassWord required")

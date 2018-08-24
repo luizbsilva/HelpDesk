@@ -7,6 +7,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.ObjectError;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -17,14 +18,13 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import com.bisao.helpdesk.api.entity.User;
 import com.bisao.helpdesk.api.response.Response;
 import com.bisao.helpdesk.api.service.UserService;
 import com.mongodb.DuplicateKeyException;
 
-@RestController
+@Controller
 @RequestMapping("/api/user")
 @CrossOrigin(origins = "*")
 public class UserController {
